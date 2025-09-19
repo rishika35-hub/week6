@@ -1,0 +1,27 @@
+Global:
+  use_gpu: true
+  epoch_num: 60
+  save_model_dir: ./results/weights/rec
+  pretrained_model: null
+
+Architecture:
+  model_type: rec
+  algorithm: CRNN
+  Backbone:
+    name: MobileNetV3_small_x0_35
+  Head:
+    name: CTCHead
+    fc_decay: 0.0
+
+TrainReader:
+  dataset:
+    image_dir: ./data/rec_crops
+    label_file: ./data/rec_labels.txt
+  Transform:
+    - DecodeImage:
+        img_mode: 'RGB'
+        channel_first: false
+    - RecResizeImg:
+        image_shape: [3, 32, 320]
+    - NormalizeImage:
+        scale: 1.0

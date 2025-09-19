@@ -1,0 +1,8 @@
+# pinned minimal for this project (use appropriate paddlepaddle GPU wheel for your CUDA)
+pillow>=9.0.0
+tqdm
+kaggle
+numpy
+pandas
+paddleocr==2.6.0  # placeholder; we install specific PaddleOCR git tag in notebooks
+# Note: for PaddlePaddle (core), prefer installing paddlepaddle or paddlepaddle-gpu via the project recommended wheel.

@@ -1,0 +1,40 @@
+# minimal det config override for small experiments
+Global:
+  use_gpu: true
+  epoch_num: 20
+  print_batch_step: 10
+  save_model_dir: ./results/weights
+  pretrained_model: null
+
+Train:
+  dataset:
+    dataset_num_workers: 4
+
+Architecture:
+  model_type: det
+  algorithm: DB
+  Backbone:
+    name: MobileNetV3
+  Neck:
+    name: FPN
+
+Optimizer:
+  lr: 0.001
+  learning_rate_decay:
+    name: Cosine
+
+Loss:
+  main_loss: DBLoss
+
+TrainReader:
+  dataset:
+    image_dir: ./data/raw/images
+    label_file_list: ['./data/det_labels']
+  Transform:
+    - DecodeImage:
+        to_rgb: true
+        channel_first: false
+    - DetResizeForTest:
+        image_shape: [640, 640]
+    - NormalizeImage:
+        scale: 1.0
